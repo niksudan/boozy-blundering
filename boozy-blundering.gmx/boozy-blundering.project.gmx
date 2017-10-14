@@ -6,13 +6,26 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprLogo</sprite>
-    <sprite>sprites\sprMenu</sprite>
+    <sprites name="Menu">
+      <sprite>sprites\sprLogo</sprite>
+      <sprite>sprites\sprMenu</sprite>
+    </sprites>
+    <sprites name="Characters">
+      <sprite>sprites\sprRocker</sprite>
+      <sprite>sprites\sprNerd</sprite>
+      <sprite>sprites\sprLad</sprite>
+      <sprite>sprites\sprJoker</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bgMain</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\bob.gml</script>
+    <script>scripts\is_character_select.gml</script>
+    <script>scripts\is_menu.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\control</object>
   </objects>

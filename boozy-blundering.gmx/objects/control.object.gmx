@@ -29,28 +29,67 @@
 
 // The game's core state
 // This will update depending on what situation the player gets into
-// 0 - Idle on the menu
-// 1 - Menu animation
-// 2 - Character select
-// 3 - Character dialogue
-// 4 - Gameover
-// 5 - Victory
+// 0 - [Scene] Menu
+// 1 - [Animation] Menu to character select
+// 2 - [Scene] Character select
+// 3 - [Animation] Character select to conversation
+// 4 - [Scene] Conversation
+// 5 - [Animation] Conversation to character select
+// 6 - [Scene] Gameover
+// 7 - [Scene] Victory
 gameState = 0;
 
 // Sin wave incremental
 n = 0;
 
+// Generic sprite speed
+spriteSpeed = 0.2;
+
+// Generic transition speed
+transitionSpeed = 3;
+
+// Generic blinking rate
+blinkRate = 300;
+
+// ==================
+// Menu
+// ==================
+
 // Menu sprite index
 menuIndex = 0;
-
-// Menu sprite speed
-menuSpeed = 0.2;
 
 // Menu sprite vertical position
 menuPosition = 0;
 
-// Menu sprite transition speed
-menuPositionSpeed = 2;
+// ==================
+// Character Select
+// ==================
+
+// Character vertical positions
+charSelectPosition = room_height;
+
+// Character sprites
+charSprites = ds_list_create();
+ds_list_add(charSprites, sprRocker, sprNerd, sprLad, sprJoker);
+
+// Character sprite indexes
+charIndexes = ds_list_create();
+ds_list_add(charIndexes,
+    random_range(0, blinkRate / 2),
+    random_range(0, blinkRate / 2),
+    random_range(0, blinkRate / 2),
+    random_range(0, blinkRate / 2)
+);
+
+// Character bob offsets
+charBobOffsets = ds_list_create();
+ds_list_add(charBobOffsets,
+    random_range(0, 360),
+    random_range(0, 360),
+    random_range(0, 360),
+    random_range(0, 360)
+);
+
 </string>
           </argument>
         </arguments>
@@ -77,23 +116,31 @@ menuPositionSpeed = 2;
 
 n += 1;
 
-switch (gameState) {
-
-    // Menu transition
-    case 1:
-        if (menuPosition &lt;= 144) {
-            if (menuIndex &lt; 18) {
-                menuIndex += menuSpeed;
-            } else {
-                menuPosition += menuPositionSpeed;
-            }
+// Menu to character select
+if (gameState == 1) {
+    if (menuPosition &lt;= room_height) {
+        if (menuIndex &lt; 18) {
+            menuIndex += spriteSpeed;
         } else {
-            gameState = 2;
+            menuPosition += transitionSpeed;
+            charSelectPosition = room_height - menuPosition;
         }
-        break;
-
+    } else {
+        gameState = 2;
+    }
 }
 
+// Character select blinking
+if (is_character_select()) {
+    for (var i = 0; i &lt; ds_list_size(charIndexes); i += 1) {
+        var charIndex = ds_list_find_value(charIndexes, i);
+        charIndex += 1;
+        if (charIndex &gt; blinkRate) {
+            charIndex = random_range(0, blinkRate / 2);
+        }
+        ds_list_replace(charIndexes, i, charIndex);
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -149,15 +196,22 @@ switch (gameState) {
             <kind>1</kind>
             <string>/// Draw UI elements
 
-switch (gameState) {
+// Character select
+if (is_character_select()) {
+    for (var i = 0; i &lt; ds_list_size(charSprites) i += 1) {
+        draw_sprite(
+             ds_list_find_value(charSprites, i),
+            clamp(ds_list_find_value(charIndexes, i) - blinkRate + 10, 0, 1),
+            ((room_width / 4) * i + (room_width / 8)),
+            room_height + charSelectPosition + 4 + bob(0.02, 2, ds_list_find_value(charBobOffsets, i))
+        );
+    }
+}
 
-    // Menu elements
-    case 0:
-    case 1:
-        draw_sprite(sprMenu, menuIndex, 0, menuPosition);
-        draw_sprite(sprLogo, 0, 0, 4 + menuPosition + (sin(n / 25) * 4));
-        break;
-
+// Menu
+if (is_menu()) {
+    draw_sprite(sprMenu, menuIndex, 0, menuPosition);
+    draw_sprite(sprLogo, 0, 0, 4 + menuPosition + bob(0.04, 4, 0));
 }
 
 </string>
