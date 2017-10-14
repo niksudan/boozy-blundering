@@ -275,17 +275,21 @@ if (has_characters()) {
     for (var i = 0; i &lt; 4 i += 1) {
         var charX = character_x_position(i);
         var charY = charPosition;
+        var bobOffset = ds_list_find_value(charBobOffsets, i);
         if (selectedChar == i &amp;&amp; gameState != 2) {
             charX = character_x_position(i) + (
                 (charPosition / room_height) * ((room_width / 2) - character_x_position(i))
             );
             charY = 0;
         }
-        draw_sprite(
-             ds_list_find_value(charSprites, i),
+        draw_sprite_ext(
+            ds_list_find_value(charSprites, i),
             clamp(ds_list_find_value(charIndexes, i) - blinkRate + 10, 0, 1),
             charX,
-            room_height + charY + 4 + bob(0.02, 2, ds_list_find_value(charBobOffsets, i))
+            room_height + charY + 4 + bob(0.1, 2, bobOffset),
+            1, 1,
+            bob(0.05, 2, bobOffset),
+            c_white, 1
         );
     }
     
