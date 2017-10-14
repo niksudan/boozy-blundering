@@ -46,7 +46,7 @@ n = 0;
 spriteSpeed = 0.2;
 
 // Generic transition speed
-transitionSpeed = 3;
+transitionSpeed = 4;
 
 // Generic blinking rate
 blinkRate = 300;
@@ -62,11 +62,11 @@ menuIndex = 0;
 menuPosition = 0;
 
 // ==================
-// Character Select
+// Characters
 // ==================
 
 // Character vertical positions
-charSelectPosition = room_height;
+charPosition = room_height;
 
 // Character sprites
 charSprites = ds_list_create();
@@ -89,6 +89,10 @@ ds_list_add(charBobOffsets,
     random_range(0, 360),
     random_range(0, 360)
 );
+
+// The select character index
+// -1 = no selection
+selectedChar = -1;
 
 </string>
           </argument>
@@ -116,23 +120,9 @@ ds_list_add(charBobOffsets,
 
 n += 1;
 
-// Menu to character select
-if (gameState == 1) {
-    if (menuPosition &lt;= room_height) {
-        if (menuIndex &lt; 18) {
-            menuIndex += spriteSpeed;
-        } else {
-            menuPosition += transitionSpeed;
-            charSelectPosition = room_height - menuPosition;
-        }
-    } else {
-        gameState = 2;
-    }
-}
-
-// Character select blinking
-if (is_character_select()) {
-    for (var i = 0; i &lt; ds_list_size(charIndexes); i += 1) {
+// Character blinking
+if (has_characters()) {
+    for (var i = 0; i &lt; 4; i += 1) {
         var charIndex = ds_list_find_value(charIndexes, i);
         charIndex += 1;
         if (charIndex &gt; blinkRate) {
@@ -141,6 +131,67 @@ if (is_character_select()) {
         ds_list_replace(charIndexes, i, charIndex);
     }
 }
+
+// [Animation] Menu to character select
+if (gameState == 1) {
+    if (menuPosition &lt;= room_height) {
+        if (menuIndex &lt; 18) {
+            menuIndex += spriteSpeed;
+        } else {
+            menuPosition += transitionSpeed;
+            charPosition = room_height - menuPosition;
+        }
+    } else {
+        gameState = 2;
+        charPosition = 0;
+    }
+}
+
+// [Animation] Character select to conversation
+if (gameState == 3) {
+    if (charPosition &lt;= room_height) {
+        charPosition += transitionSpeed;
+    } else {
+        gameState = 4;
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Logical events
+
+// [Scene] Character select
+if (gameState == 2) {
+    selectedChar = -1;
+    for (var i = 0; i &lt; 4 i += 1) {
+        var xPos =  character_x_position(i);
+        var padding = 20;
+        if (mouse_x &gt;= xPos - padding &amp;&amp; mouse_x &lt;= xPos + padding &amp;&amp; mouse_y &gt; 32 &amp;&amp; mouse_y &lt; 96) {
+            selectedChar = i;
+        }
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -167,11 +218,20 @@ if (is_character_select()) {
 
 switch (gameState) {
 
-    // Commence the menu animation
+    // [Scene] Menu
     case 0:
         gameState = 1;
         break;
+
+    // [Scene] Character select
+    case 2:
+        if (selectedChar != -1) {
+            gameState = 3;
+        }
+        break;
+
 }
+
 </string>
           </argument>
         </arguments>
@@ -196,20 +256,51 @@ switch (gameState) {
             <kind>1</kind>
             <string>/// Draw UI elements
 
-// Character select
-if (is_character_select()) {
-    for (var i = 0; i &lt; ds_list_size(charSprites) i += 1) {
+// Darkener
+draw_set_alpha((charPosition / room_height) * 0.5);
+draw_set_color(c_black);
+draw_rectangle(0, 0, room_width, room_height, false);
+
+// Font
+draw_set_alpha(1);
+draw_set_color(c_white);
+draw_set_font(fntMain);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+texture_set_interpolation(false);
+
+if (has_characters()) {
+
+    // Characters
+    for (var i = 0; i &lt; 4 i += 1) {
+        var charX = character_x_position(i);
+        var charY = charPosition;
+        if (selectedChar == i &amp;&amp; gameState != 2) {
+            charX = character_x_position(i) + (
+                (charPosition / room_height) * ((room_width / 2) - character_x_position(i))
+            );
+            charY = 0;
+        }
         draw_sprite(
              ds_list_find_value(charSprites, i),
             clamp(ds_list_find_value(charIndexes, i) - blinkRate + 10, 0, 1),
-            ((room_width / 4) * i + (room_width / 8)),
-            room_height + charSelectPosition + 4 + bob(0.02, 2, ds_list_find_value(charBobOffsets, i))
+            charX,
+            room_height + charY + 4 + bob(0.02, 2, ds_list_find_value(charBobOffsets, i))
         );
     }
+    
+    // Character select prompt text
+    if (gameState == 2) {
+        draw_text(room_width / 2, 20, "Now convince them you're drunk");
+        if (selectedChar != -1) {
+            draw_text(mouse_x, mouse_y - 6, "Talk");
+        }
+    }
+
 }
 
 // Menu
-if (is_menu()) {
+if (has_menu()) {
     draw_sprite(sprMenu, menuIndex, 0, menuPosition);
     draw_sprite(sprLogo, 0, 0, 4 + menuPosition + bob(0.04, 4, 0));
 }
