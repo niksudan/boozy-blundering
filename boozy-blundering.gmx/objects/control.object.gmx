@@ -51,9 +51,9 @@ transitionSpeed = 4;
 // Generic blinking rate
 blinkRate = 300;
 
-// ==================
+// ========================================================================
 // Menu
-// ==================
+// ========================================================================
 
 // Menu sprite index
 menuIndex = 0;
@@ -61,9 +61,9 @@ menuIndex = 0;
 // Menu sprite vertical position
 menuPosition = 0;
 
-// ==================
+// ========================================================================
 // Characters
-// ==================
+// ========================================================================
 
 // Character vertical positions
 charPosition = room_height;
@@ -90,9 +90,31 @@ ds_list_add(charBobOffsets,
     random_range(0, 360)
 );
 
-// The select character index
+// Character bob rates
+charBobRates = ds_list_create();
+ds_list_add(charBobRates,
+    1,
+    1,
+    1,
+    1
+);
+
+// The selected character index
 // -1 = no selection
 selectedChar = -1;
+
+// ========================================================================
+// Conversation
+// ========================================================================
+
+// Whether or not the character is talking
+isTalking = false;
+
+// A timer for the talk animation
+talkTimer = 0;
+
+// How long the talking animation goes on for
+talkTime = 20;
 
 </string>
           </argument>
@@ -132,6 +154,48 @@ if (has_characters()) {
     }
 }
 
+// Conversation talking
+if (gameState == 4) {
+    if (isTalking &amp;&amp; talkTimer &lt; talkTime) {
+        talkTimer += 1;
+    } else {
+        talkTimer = 0;
+    }
+    
+    for (var i = 0; i &lt; 4; i += 1) {
+        var bobRate = ds_list_find_value(charBobRates, i);
+        var bobOffset = ds_list_find_value(charBobOffsets, i);
+        var bobRateTarget = bob(0.05, 2, bobOffset);
+        if (isTalking &amp;&amp; selectedChar == i) {
+            bobRateTarget = bob(0.2, 2, bobOffset);
+        }
+        bobRate += (bobRateTarget - bobRate) / 20;
+        ds_list_replace(charBobRates, i, bobRate);
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Animations
+
 // [Animation] Menu to character select
 if (gameState == 1) {
     if (menuPosition &lt;= room_height) {
@@ -139,11 +203,10 @@ if (gameState == 1) {
             menuIndex += spriteSpeed;
         } else {
             menuPosition += transitionSpeed;
-            charPosition = room_height - menuPosition;
+            charPosition = max(0, room_height - menuPosition);
         }
     } else {
         gameState = 2;
-        charPosition = 0;
     }
 }
 
@@ -230,6 +293,10 @@ switch (gameState) {
         }
         break;
 
+    // [Scene] Conversation
+    case 4:
+        isTalking = !isTalking;
+        break;
 }
 
 </string>
@@ -275,20 +342,28 @@ if (has_characters()) {
     for (var i = 0; i &lt; 4 i += 1) {
         var charX = character_x_position(i);
         var charY = charPosition;
+        var bobRate = ds_list_find_value(charBobRates, i);
         var bobOffset = ds_list_find_value(charBobOffsets, i);
+        var charIndex = clamp(ds_list_find_value(charIndexes, i) - blinkRate + 10, 0, 1)
+
+        // Selected character
         if (selectedChar == i &amp;&amp; gameState != 2) {
             charX = character_x_position(i) + (
                 (charPosition / room_height) * ((room_width / 2) - character_x_position(i))
             );
             charY = 0;
+            if (isTalking &amp;&amp; talkTimer &lt; talkTime / 2) {
+                charIndex = 2;
+            }
         }
+
         draw_sprite_ext(
             ds_list_find_value(charSprites, i),
-            clamp(ds_list_find_value(charIndexes, i) - blinkRate + 10, 0, 1),
+            charIndex,
             charX,
             room_height + charY + 4 + bob(0.1, 2, bobOffset),
             1, 1,
-            bob(0.05, 2, bobOffset),
+            bobRate,
             c_white, 1
         );
     }
