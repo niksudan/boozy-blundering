@@ -22,20 +22,22 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\answer_x_position.gml</script>
     <script>scripts\bob.gml</script>
     <script>scripts\character_x_position.gml</script>
-    <script>scripts\answer_x_position.gml</script>
     <script>scripts\create_phrase.gml</script>
     <script>scripts\define_phrases.gml</script>
+    <script>scripts\get_char_answer.gml</script>
+    <script>scripts\get_char_answers.gml</script>
+    <script>scripts\get_char_phrase.gml</script>
+    <script>scripts\get_char_phrases.gml</script>
+    <script>scripts\get_char_question.gml</script>
     <script>scripts\has_characters.gml</script>
     <script>scripts\has_menu.gml</script>
     <script>scripts\mouse_bounds.gml</script>
-    <script>scripts\get_char_phrases.gml</script>
-    <script>scripts\get_char_phrase.gml</script>
-    <script>scripts\get_char_question.gml</script>
-    <script>scripts\get_char_answers.gml</script>
-    <script>scripts\get_char_answer.gml</script>
+    <script>scripts\set_detection_phrases.gml</script>
     <script>scripts\set_douche_detection.gml</script>
+    <script>scripts\get_detection_message.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMain</font>

@@ -1,34 +1,95 @@
 /// define_phrases
 
+
 // Rocker
-create_phrase(0, 'yo whats up', 'YOOOOO', 'hey', 'hello there');
-create_phrase(0, 'yo whats up', 'YOOOOO', 'hey', 'hello there');
-create_phrase(0, 'yo whats up', 'YOOOOO', 'hey', 'hello there');
-create_phrase(0, 'yo whats up', 'YOOOOO', 'hey', 'hello there');
-create_phrase(0, 'yo whats up', 'YOOOOO', 'hey', 'hello there');
-create_phrase(0, 'catch you around', 'stay lit fam', 'later', 'bye');
+set_detection_phrases("Dude...#Have you even had anything to drink?", "So not cool dude...#I can see right through you, faker!");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
+create_phrase(0, "", "", "", "");
 
 // Nerd
-create_phrase(1, 'hello', 'YOOOOO', 'hey', 'hello there');
-create_phrase(1, 'hello', 'YOOOOO', 'hey', 'hello there');
-create_phrase(1, 'hello', 'YOOOOO', 'hey', 'hello there');
-create_phrase(1, 'hello', 'YOOOOO', 'hey', 'hello there');
-create_phrase(1, 'hello', 'YOOOOO', 'hey', 'hello there');
-create_phrase(1, 'goodbye', 'stay lit fam', 'later', 'bye');
+set_detection_phrases("You're not even drunk!#How boring.", "OK, no one is this obnoxious.#You're totally faking it.");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
+create_phrase(1, "", "", "", "");
 
 // Lad
-create_phrase(2, 'eyyyy', 'YOOOOO', 'hey', 'hello there');
-create_phrase(2, 'eyyyy', 'YOOOOO', 'hey', 'hello there');
-create_phrase(2, 'eyyyy', 'YOOOOO', 'hey', 'hello there');
-create_phrase(2, 'eyyyy', 'YOOOOO', 'hey', 'hello there');
-create_phrase(2, 'eyyyy', 'YOOOOO', 'hey', 'hello there');
-create_phrase(2, 'thats right get lost', 'stay lit fam', 'later', 'bye');
+set_detection_phrases("YOOOO CHECK OUT THIS LOSER!#THEY'RE STILL SOBER!", "YOOOO CHECK OUT THIS LOSER!#THEY'RE FAKING IT!");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
+create_phrase(2, "", "", "", "");
 
 // Joker
-create_phrase(3, 'hey there', 'YOOOOO', 'hey', 'hello there');
-create_phrase(3, 'hey there', 'YOOOOO', 'hey', 'hello there');
-create_phrase(3, 'hey there', 'YOOOOO', 'hey', 'hello there');
-create_phrase(3, 'hey there', 'YOOOOO', 'hey', 'hello there');
-create_phrase(3, 'hey there', 'YOOOOO', 'hey', 'hello there');
-create_phrase(3, 'smell ya later', 'stay lit fam', 'later', 'bye');
+set_detection_phrases("You've had nothing to drink!#What a loser!", "You're totally faking it!#What a loser!");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
+create_phrase(3, "", "", "", "");
 
