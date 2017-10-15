@@ -142,6 +142,12 @@ selectedAnswer = -1;
 // Whether the player can choose an answer
 canChooseAnswer = false;
 
+// How much of a douchebag you're being
+// - Some characters will need you to be douchey to convince them
+// - Others will see you're being a fake douche
+// - This resets per conversation
+douchebagPoints = 0;
+
 </string>
           </argument>
         </arguments>
@@ -204,9 +210,7 @@ if (gameState == 4) {
     
     // Conversation typewriter effect
     canChooseAnswer = false;
-    var charPhrases = ds_list_find_value(phrases, selectedChar);
-    var phrase = ds_list_find_value(charPhrases, currentPhrase);
-    var question = ds_list_find_value(phrase, 0);
+    var question =  get_char_question(selectedChar, currentPhrase);
     if (phraseLength &lt; string_length(question)) {
         phraseLength += 0.3;
         isTalking = true;
@@ -304,6 +308,7 @@ if (gameState == 2) {
         var xPos = character_x_position(i);
         if (mouse_bounds(xPos - padding, xPos + padding, 32, 96)) {
             selectedChar = i;
+            douchebagPoints = 0;
             phraseLength = 0;
             canChooseAnswer = false;
             selectedAnswer = -1;
@@ -375,6 +380,8 @@ switch (gameState) {
     // [Scene] Conversation
     case 4:
         if (selectedAnswer != -1) {
+            var answer = get_char_answer(selectedChar, currentPhrase, selectedAnswer);
+            douchebagPoints += answer[1];
             currentPhrase += 1;
             phraseLength = 0;
         }
@@ -470,14 +477,13 @@ if (has_characters()) {
         var phrase = ds_list_find_value(charPhrases, currentPhrase);
 
         // Question
-        var question = ds_list_find_value(phrase, 0);
+        var question = get_char_question(selectedChar, currentPhrase);
         draw_text(room_width / 2, 20, string_copy(question, 0, ceil(phraseLength)));
 
         // Answers
         if (canChooseAnswer) {
-            var answers = ds_list_find_value(phrase, 1);
             for (var i = 0; i &lt; 3; i += 1) {
-                var answer = ds_list_find_value(answers, i);
+                var answer = get_char_answer(selectedChar, currentPhrase, i);
                 var answerX = answer_x_position(i);
                 var answerY = 100;
                 draw_text(answerX, answerY, answer[0] + '#' + string(answer[1]));
