@@ -382,6 +382,7 @@ switch (gameState) {
         if (selectedAnswer != -1) {
             var answer = get_char_answer(selectedChar, currentPhrase, selectedAnswer);
             douchebagPoints += answer[1];
+            douchebagPoints = clamp(douchebagPoints, -3, -3);
             currentPhrase += 1;
             phraseLength = 0;
         }
