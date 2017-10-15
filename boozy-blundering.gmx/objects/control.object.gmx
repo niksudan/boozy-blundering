@@ -336,11 +336,13 @@ if (gameState == 7) {
 
 // Menu sounds
 if (gameState == 1) {
-    if (menuIndex == 4) {
+    if (menuIndex &gt;= 4 &amp;&amp; menuIndex &lt; 5 &amp;&amp; !audio_is_playing(sndClink)) {
         audio_play_sound(sndClink, 0, false);
-    } else if (menuIndex == 7) {
+    }
+    if (menuIndex &gt;= 7 &amp;&amp; menuIndex &lt; 8 &amp;&amp; !audio_is_playing(sndSlurp)) {
         audio_play_sound(sndSlurp, 0, false);
-    } else if (menuIndex == 13) {
+    }
+    if (menuIndex &gt;= 13 &amp;&amp; menuIndex &lt; 14 &amp;&amp; !audio_is_playing(sndDonk)) {
         audio_play_sound(sndDonk, 0, false);
     }
 }
