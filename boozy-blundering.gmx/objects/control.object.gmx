@@ -631,7 +631,7 @@ if (has_characters()) {
         var message = get_detection_message(selectedChar, detectionType);
         draw_sprite_ext(sprBubble, 0, room_width / 2, 24, 1, min(1, phraseLength / 5), bob(0.1, 1, 0), c_white, 1);
         draw_set_color(c_black);
-        draw_text_transformed(room_width / 2, 20, string_copy(message, 0, ceil(phraseLength)), 1, 1, bob(0.1, 2, 0));
+        draw_text_transformed(room_width / 2, 20, string_copy(message, 0, ceil(phraseLength)), 1, 1, bob(0.1, 1, 0));
     }
 
 }

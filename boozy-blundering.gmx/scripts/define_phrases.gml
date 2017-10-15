@@ -34,22 +34,22 @@ create_phrase(2, "I'LL WRECK YA IF YOU DON'T#BUGGER OFF YOU PIPSQUEAK", "FIGHT M
 create_phrase(2, "HAHAHAHA! I got you real good, didn't I?#The look on YOUR FACE! HAHA!", "You little#shit", "Damn!", "You#got me");
 create_phrase(2, "I'm so wasted right now...#I can't remember how much I've had", "ME TOO!", "You crazy", "Need some#water?");
 create_phrase(2, "One time me and the boys got so boozed#we... we... oh it was mental", "I've done#worse", "What#happened?", "Oh my");
-create_phrase(2, "We went round Jimmys and then we told him#to fuckin... eat his dog's TURD!!", "YOOOO#THAT NASTY", "Eww!", "Gross");
-create_phrase(2, "And the best part was...#he FUCKIN DID IT THAT LITTLE COON!", "OH SNAP#BROTHER!", "Haha!", "Poor#Jimmy");
+create_phrase(2, "We went round Jomos and then we told em#to fuckin... eat a DOG TURD!!", "YOOOO#THAT NASTY", "Eww!", "Gross");
+create_phrase(2, "And the best part was...#JOMO FUCKIN DID IT THAT LITTLE COON!", "OH SNAP#BROTHER!", "Haha!", "Poor#Jimmy");
 create_phrase(2, "Ah man, good times good times...#Yo how much you had?", "Can't#remember", "Not enough", "Just one");
 create_phrase(2, "HAHA! Good one.#Mate you're pretty sick, anyone tell you that?", "All the#time", "Oh yeah?", "Nope#Just you");
 create_phrase(2, "Yeah, if you're ever in the hood hit me and#the boys up. We'll take you round town!", "YOU BET!", "Will do!", "I'm good#thanks");
 
 // Joker
-set_detection_phrases("You've had nothing to drink!#What a loser!", "You're totally faking it!#What a loser!");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
-create_phrase(3, "", "", "", "");
+set_detection_phrases("People think I'm a loser, but you are just...#a bigger one!", "People think I'm a loser, but you're an#even bigger one for pretending to be drunk!");
+create_phrase(3, "Wow, you're a proper sight then, eh?", "Look in#a mirror", "You what?", "What's#wrong?");
+create_phrase(3, "No offence bud, haha!#I like to have a joke around.", "You ain't#funny", "Hah...", "That was#mean");
+create_phrase(3, "You seen that pudgy fella though?#Goes on about me like I'm some crapstain", "He was#right", "Oh?", "He's#not bad");
+create_phrase(3, "Keeps telling everyone I ate dog crap...#It ain't true, I swear!", "Tasted#good huh?", "Sure...", "Really?");
+create_phrase(3, "Nah nah! I swear on your life that I didn't!", "Don't you#dare", "My life?", "Excuse me?");
+create_phrase(3, "Haha! Got you there again!#Hey, you like my TShirt?", "It's#stupid", "Sure!", "Don't#know");
+create_phrase(3, "It's from a webtoon series that I'm writing.#Got myself some fans!", "You#loser", "I'll#check em", "Don't read#comics");
+create_phrase(3, "This character is called Frumpo,#and he just likes to screw with people", "Like you?", "Right...", "Frump#what?");
+create_phrase(3, "Yeah this one time he goes to the head office#and just pisses over bossman's noggin! HAHA!", "Bet you#loved that", "Haha!", "How#immature");
+create_phrase(3, "Mate if you're on Twapper give us a follow innit,#would be appreciated! See you around.", "HAH#no", "Defo!", "Not on#Twapper");
 
