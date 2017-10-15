@@ -16,16 +16,16 @@ create_phrase(0, "Oh well, never too late!#I'll see you around my dude.", "Pff,#
 
 // Nerd
 set_detection_phrases("You're not even drunk!#How boring.", "OK, no one is this obnoxious.#You're totally faking it.");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
-create_phrase(1, "", "", "", "");
+create_phrase(1, "Hi there! What brings you here?", "Not your#beeswax", "Just#mingling", "Trying to#be drunk");
+create_phrase(1, "Well, what do you do for a living?", "I'm a#CEO", "It's#a bore", "Well I#work as...");
+create_phrase(1, "Haha, I see!#Can I ask you a weird question?", "Aren't#they all?", "Go for it", "Don't see#why not");
+create_phrase(1, "Do you believe in aliens?", "LOL, NO!", "Huh...?", "If there#was proof");
+create_phrase(1, "Like, we can't be alone in the Universe?#It's so big...", "That's what#she said", "Maybe#you're right", "Yeah...");
+create_phrase(1, "Ah well.. when it's not the Fermi Paradox,#it's gotta be games! You play anything?", "Games are#for kids", "I'm always#down", "If I#get time");
+create_phrase(1, "I think there's an arcade machine#around the back somewhere", "I'd#rather not", "Wanna#game?", "I don't#have coins");
+create_phrase(1, "Nah it's good, I think I remember it was broken.#Someone rage quit, eh?", "You#what?", "Haha!", "Heh");
+create_phrase(1, "Ton of good releases coming this year though.#What do you like?", "Free things", "Indie games#are cool", "Minecraft?");
+create_phrase(1, "Well let's hope that it will be the#year of that then! Cheers!", "Yeah#whatever", "Yeah!#Cheers", "Sure?");
 
 // Lad
 set_detection_phrases("YOOOO CHECK OUT THIS LOSER!#THEY'RE STILL SOBER!", "YOOOO CHECK OUT THIS LOSER!#THEY'RE FAKING IT!");
