@@ -680,7 +680,7 @@ if (has_characters()) {
             }
         }
         if (isNewGame) {
-            draw_text(room_width / 2, 20, "Convince them you're off your rocker");
+            draw_text(room_width / 2, 20, "Convince them you're totally 'drunk'");
         }
         if (selectedChar != -1) {
             draw_sprite_ext(sprPrompt, 0, mouse_x, mouse_y, 1, 1, bob(0.25, 5, 0), c_white, 1);
