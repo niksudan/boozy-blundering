@@ -24,8 +24,11 @@
   <scripts name="scripts">
     <script>scripts\bob.gml</script>
     <script>scripts\character_x_position.gml</script>
+    <script>scripts\create_phrase.gml</script>
+    <script>scripts\define_phrases.gml</script>
     <script>scripts\has_characters.gml</script>
     <script>scripts\has_menu.gml</script>
+    <script>scripts\mouse_bounds.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMain</font>
