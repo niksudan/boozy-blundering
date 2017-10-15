@@ -224,6 +224,16 @@ if (gameState == 3) {
     }
 }
 
+// [Animation] Conversation to character select
+if (gameState == 5) {
+    if (charPosition &gt; 0) {
+        charPosition -= transitionSpeed;
+        charPosition = max(0, charPosition);
+    } else {
+        gameState = 2;
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -300,7 +310,7 @@ switch (gameState) {
 
     // [Scene] Conversation
     case 4:
-        isLaughing = !isLaughing;
+        gameState = 5;
         break;
 }
 
