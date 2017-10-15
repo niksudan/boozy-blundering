@@ -208,9 +208,11 @@ if (gameState == 4) {
     var phrase = ds_list_find_value(charPhrases, currentPhrase);
     var question = ds_list_find_value(phrase, 0);
     if (phraseLength &lt; string_length(question)) {
-        phraseLength += 0.5;
+        phraseLength += 0.3;
+        isTalking = true;
     } else {
         canChooseAnswer = true;
+        isTalking = false;
     }
 
 }
@@ -302,6 +304,9 @@ if (gameState == 2) {
         var xPos = character_x_position(i);
         if (mouse_bounds(xPos - padding, xPos + padding, 32, 96)) {
             selectedChar = i;
+            phraseLength = 0;
+            canChooseAnswer = false;
+            selectedAnswer = -1;
         }
     }
 }
@@ -470,10 +475,12 @@ if (has_characters()) {
 
         // Answers
         if (canChooseAnswer) {
+            var answers = ds_list_find_value(phrase, 1);
             for (var i = 0; i &lt; 3; i += 1) {
+                var answer = ds_list_find_value(answers, i);
                 var answerX = answer_x_position(i);
                 var answerY = 100;
-                draw_text(answerX, answerY, ds_list_find_value(phrase, i + 1));
+                draw_text(answerX, answerY, answer[0] + '#' + string(answer[1]));
             }
         }
     
