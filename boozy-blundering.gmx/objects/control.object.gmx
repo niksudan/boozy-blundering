@@ -132,6 +132,9 @@ define_phrases();
 // The current phrase the player is on
 currentPhrase = 0;
 
+// The string length of the current phrase for the typewriter effect
+phraseLength = 0;
+
 </string>
           </argument>
         </arguments>
@@ -183,13 +186,23 @@ if (has_characters()) {
     }
 }
 
-// Conversation talking
 if (gameState == 4) {
+
+    // Conversation talking
     if (isTalking &amp;&amp; talkTimer &lt; talkTime) {
         talkTimer += 1;
     } else {
         talkTimer = 0;
     }
+    
+    // Conversation typewriter effect
+    var charPhrases = ds_list_find_value(phrases, selectedChar);
+    var phrase = ds_list_find_value(charPhrases, currentPhrase);
+    var question = ds_list_find_value(phrase, 0);
+    if (phraseLength &lt; string_length(question)) {
+        phraseLength += 0.5;
+    }
+
 }
 
 </string>
@@ -335,6 +348,7 @@ switch (gameState) {
     // [Scene] Conversation
     case 4:
         currentPhrase += 1;
+        phraseLength = 0;
         break;
 }
 
@@ -425,7 +439,8 @@ if (has_characters()) {
     if (gameState == 4) {
         var charPhrases = ds_list_find_value(phrases, selectedChar);
         var phrase = ds_list_find_value(charPhrases, currentPhrase);
-        draw_text(room_width / 2, 20, ds_list_find_value(phrase, 0));
+        var question = ds_list_find_value(phrase, 0);
+        draw_text(room_width / 2, 20, string_copy(question, 0, ceil(phraseLength)));
     }
 
 }
