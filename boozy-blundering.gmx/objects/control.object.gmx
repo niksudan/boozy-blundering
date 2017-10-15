@@ -53,6 +53,12 @@ transitionSpeed = 4;
 // Generic blinking rate
 blinkRate = 300;
 
+// Start playing that music!
+if (!audio_is_playing(sndBackground)) {
+    audio_play_sound(sndBackground, 0, true);
+    audio_play_sound(sndAmbience, 0, true);
+}
+
 // ========================================================================
 // Menu
 // ========================================================================
@@ -302,6 +308,63 @@ if (gameState == 7) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// Audio effects
+
+// Menu sounds
+if (gameState == 1) {
+    if (menuIndex == 4) {
+        audio_play_sound(sndClink, 0, false);
+    } else if (menuIndex == 7) {
+        audio_play_sound(sndSlurp, 0, false);
+    } else if (menuIndex == 13) {
+        audio_play_sound(sndDonk, 0, false);
+    }
+}
+
+// Talking sounds
+if (has_characters()) {
+    if (isTalking &amp;&amp; talkTimer == talkTime / 2) {
+        switch (selectedChar) {
+            case 0:
+                var talk = audio_play_sound(choose(sndRocker1, sndRocker2, sndRocker3, sndRocker4), 0, false);
+                audio_sound_pitch(talk, random_range(1.1, 1.3));
+                break;
+            case 1:
+                var talk = audio_play_sound(choose(sndNerd1, sndNerd2, sndNerd3, sndNerd4), 0, false);
+                audio_sound_pitch(talk, random_range(1.1, 1.3));
+                break;
+            case 2:
+                var talk = audio_play_sound(choose(sndLad1, sndLad2, sndLad3, sndLad4), 0, false);
+                audio_sound_pitch(talk, random_range(1.1, 1.3));
+                break;
+            case 3:
+                var talk = audio_play_sound(choose(sndJoker1, sndJoker2, sndJoker3, sndJoker4), 0, false);
+                audio_sound_pitch(talk, random_range(1.1, 1.3));
+                break;
+        }
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Animations
 
 // [Animation] Menu to character select
@@ -414,6 +477,7 @@ if (gameState == 4) {
             }
             if (didWin) {
                 gameState = 7;
+                audio_play_sound(sndVictory, 0, false);
             }
         }
         
@@ -474,6 +538,8 @@ switch (gameState) {
     case 2:
         if (selectedChar != -1) {
             gameState = 3;
+            var hey = audio_play_sound(choose(sndHey1, sndHey2, sndHey3, sndHey4, sndHey5), 0, false);
+            audio_sound_pitch(hey, random_range(1.1, 1.3));
         }
         break;
 
@@ -487,6 +553,8 @@ switch (gameState) {
             currentPhrase += 1;
             phraseLength = 0;
             answerBubbleHeight = 0;
+            var hey = audio_play_sound(sndSelect, 0, false);
+            audio_sound_pitch(hey, random_range(1, 1.3));
         }
         break;
         
@@ -494,6 +562,7 @@ switch (gameState) {
     case 6:
         if (canChooseAnswer) {
             gameState = 7;
+            audio_play_sound(sndGameover, 0, false);
         }
         break;
         

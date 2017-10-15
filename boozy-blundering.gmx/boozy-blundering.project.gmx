@@ -4,17 +4,47 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sndAmbience</sound>
+    <sound>sound\sndBackground</sound>
+    <sound>sound\sndClink</sound>
+    <sound>sound\sndDonk</sound>
+    <sound>sound\sndGameover</sound>
+    <sound>sound\sndHey1</sound>
+    <sound>sound\sndHey2</sound>
+    <sound>sound\sndHey3</sound>
+    <sound>sound\sndHey4</sound>
+    <sound>sound\sndHey5</sound>
+    <sound>sound\sndJoker1</sound>
+    <sound>sound\sndJoker2</sound>
+    <sound>sound\sndJoker3</sound>
+    <sound>sound\sndJoker4</sound>
+    <sound>sound\sndLad1</sound>
+    <sound>sound\sndLad2</sound>
+    <sound>sound\sndLad3</sound>
+    <sound>sound\sndLad4</sound>
+    <sound>sound\sndNerd1</sound>
+    <sound>sound\sndNerd2</sound>
+    <sound>sound\sndNerd3</sound>
+    <sound>sound\sndNerd4</sound>
+    <sound>sound\sndRocker1</sound>
+    <sound>sound\sndRocker2</sound>
+    <sound>sound\sndRocker3</sound>
+    <sound>sound\sndRocker4</sound>
+    <sound>sound\sndSlurp</sound>
+    <sound>sound\sndSelect</sound>
+    <sound>sound\sndVictory</sound>
+  </sounds>
   <sprites name="sprites">
-    <sprites name="Menu">
-      <sprite>sprites\sprLogo</sprite>
-      <sprite>sprites\sprMenu</sprite>
-    </sprites>
     <sprites name="Characters">
       <sprite>sprites\sprRocker</sprite>
       <sprite>sprites\sprNerd</sprite>
       <sprite>sprites\sprLad</sprite>
       <sprite>sprites\sprJoker</sprite>
+    </sprites>
+    <sprites name="Menu">
+      <sprite>sprites\sprLogo</sprite>
+      <sprite>sprites\sprMenu</sprite>
     </sprites>
     <sprites name="UI">
       <sprite>sprites\sprBubble</sprite>
