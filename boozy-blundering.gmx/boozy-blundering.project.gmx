@@ -35,6 +35,7 @@
     <script>scripts\get_char_question.gml</script>
     <script>scripts\get_char_answers.gml</script>
     <script>scripts\get_char_answer.gml</script>
+    <script>scripts\set_douche_detection.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntMain</font>

@@ -148,6 +148,20 @@ canChooseAnswer = false;
 // - This resets per conversation
 douchebagPoints = 0;
 
+// Character douche detection ranges
+// If douchebagPoints go out of range here then they'll call you out
+doucheDetections = ds_list_create();
+set_douche_detection(-1, 1);
+set_douche_detection(-2, 1);
+set_douche_detection(-1, 2);
+set_douche_detection(-1, 1);
+
+// Whether they've detected you're faking it (over max douchebag points)
+didDetectFake = false;
+
+// Whether they've detected you're sober (under min douchebag points)
+didDetectSober = false;
+
 </string>
           </argument>
         </arguments>
@@ -320,21 +334,46 @@ if (gameState == 2) {
 if (gameState == 4) {
     var charPhrases = ds_list_find_value(phrases, selectedChar);
     
-    // Returning to character select
-    if (currentPhrase &gt;= ds_list_size(charPhrases)) {
-        currentPhrase = 0;
-        gameState = 5;
+    // Faker/sober detection
+    var detectRange = ds_list_find_value(doucheDetections, selectedChar);
+    if (douchebagPoints &gt; detectRange[1]) {
+        didDetectFake = true;
+    } else if (douchebagPoints &lt; detectRange[0]) {
+        didDetectSober = true;
     }
     
-    // Selecting an answer
-    selectedAnswer = -1;
-    var padding = 20;
-    for (var i = 0; i &lt; 3 i += 1) {
-        var xPos = answer_x_position(i);
-        var yPos = 100;
-        if (mouse_bounds(xPos - padding, xPos + padding, yPos - padding, yPos + padding) &amp;&amp; canChooseAnswer) {
-            selectedAnswer = i;
+    if (!didDetectFake &amp;&amp; !didDetectSober) {
+    
+        // Returning to character select
+        if (currentPhrase &gt;= ds_list_size(charPhrases)) {
+            currentPhrase = 0;
+            gameState = 5;
         }
+        
+        // Selecting an answer
+        selectedAnswer = -1;
+        var padding = 20;
+        for (var i = 0; i &lt; 3 i += 1) {
+            var xPos = answer_x_position(i);
+            var yPos = 100;
+            if (mouse_bounds(xPos - padding, xPos + padding, yPos - padding, yPos + padding) &amp;&amp; canChooseAnswer) {
+                selectedAnswer = i;
+            }
+        }
+    
+    // Calling out    
+    } else {
+        if (didDetectSober) {
+            show_message("You're sober!");
+        } else if (didDetectFake) {
+            show_message("You're totally faking it!");
+        }
+        currentPhrase = 0;
+        
+        // TEMP: Reset stuff
+        gameState = 5;
+        didDetectFake = false;
+        didDetectSober = false;
     }
 
 }
@@ -382,7 +421,8 @@ switch (gameState) {
         if (selectedAnswer != -1) {
             var answer = get_char_answer(selectedChar, currentPhrase, selectedAnswer);
             douchebagPoints += answer[1];
-            douchebagPoints = clamp(douchebagPoints, -3, -3);
+            douchebagPoints = clamp(douchebagPoints, -3, 3);
+            show_debug_message('Got ' + string(answer[1]) + ' points, now on ' + string(douchebagPoints));
             currentPhrase += 1;
             phraseLength = 0;
         }
