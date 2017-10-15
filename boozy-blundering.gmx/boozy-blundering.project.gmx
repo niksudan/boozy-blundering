@@ -53,6 +53,7 @@
       <sprite>sprites\sprSmallBubble</sprite>
       <sprite>sprites\sprVictory</sprite>
     </sprites>
+    <sprite>sprites\sprCursor</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgMain</background>

@@ -28,14 +28,14 @@ create_phrase(1, "Ton of good releases coming this year though.#What do you like
 create_phrase(1, "Well let's hope that it will be the#year of that then! Cheers!", "Yeah#whatever", "Yeah!#Cheers", "Sure?");
 
 // Lad
-set_detection_phrases("YOOOO CHECK OUT THIS LOSER!#THEY'RE STILL SOBER!", "YOOOO CHECK OUT THIS LOSER!#THEY'RE FAKING IT!");
+set_detection_phrases("YOOOO CHECK OUT THIS LOSER!#THEY'RE STILL SOBER!", "YOOOO CHECK OUT THIS LOSER!#THEY'RE JUST PRETENDIN TO BE DRUNK!");
 create_phrase(2, "SO WHAT DO YOU WANT?", "YO#FUCK OFF", "Yo#not cool", "Hi?");
 create_phrase(2, "I'LL WRECK YA IF YOU DON'T#BUGGER OFF YOU PIPSQUEAK", "FIGHT ME", "I ain't#going", "Sorry");
 create_phrase(2, "HAHAHAHA! I got you real good, didn't I?#The look on YOUR FACE! HAHA!", "You little#shit", "Damn!", "You#got me");
 create_phrase(2, "I'm so wasted right now...#I can't remember how much I've had", "ME TOO!", "You crazy", "Need some#water?");
 create_phrase(2, "One time me and the boys got so boozed#we... we... oh it was mental", "I've done#worse", "What#happened?", "Oh my");
 create_phrase(2, "We went round Jomos and then we told em#to fuckin... eat a DOG TURD!!", "YOOOO#THAT NASTY", "Eww!", "Gross");
-create_phrase(2, "And the best part was...#JOMO FUCKIN DID IT THAT LITTLE COON!", "OH SNAP#BROTHER!", "Haha!", "Poor#Jimmy");
+create_phrase(2, "And the best part was...#JOMO FUCKIN DID IT THAT LITTLE COON!", "OH SNAP#BROTHER!", "Haha!", "Poor#Jomo");
 create_phrase(2, "Ah man, good times good times...#Yo how much you had?", "Can't#remember", "Not enough", "Just one");
 create_phrase(2, "HAHA! Good one.#Mate you're pretty sick, anyone tell you that?", "All the#time", "Oh yeah?", "Nope#Just you");
 create_phrase(2, "Yeah, if you're ever in the hood hit me and#the boys up. We'll take you round town!", "YOU BET!", "Will do!", "I'm good#thanks");

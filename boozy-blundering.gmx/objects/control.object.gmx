@@ -194,6 +194,30 @@ answerBubbleHeight = 0;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>801</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_cursor</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>5</kind>
+            <sprite>sprCursor</sprite>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="2">
       <action>
@@ -720,10 +744,10 @@ if (gameState == 7) {
     draw_set_alpha(((room_height - charPosition) / room_height));
     if (gameover) {
         draw_sprite_ext(sprGameover, 0, room_width / 2, room_height * 0.4, 1, 1, bob(0.2, 5, 0), c_white, 1);
-        draw_text(room_width / 2, room_height * 0.8, "What a loser! You couldn't fool them!");
+        draw_text(room_width / 2, room_height * 0.8, "What a loser! You couldn't fool them.");
     } else {
         draw_sprite_ext(sprVictory, 0, room_width / 2, room_height * 0.4, 1, 1, bob(0.2, 5, 0), c_white, 1);
-        draw_text(room_width / 2, room_height * 0.8, "Four new friends on Facebook!");
+        draw_text(room_width / 2, room_height * 0.8, "Four new friends on Facebook! Jackpot.");
     }
 }
 </string>
