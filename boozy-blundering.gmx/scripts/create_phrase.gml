@@ -16,6 +16,9 @@ answer3[1] = -1;
 var answers = ds_list_create();
 ds_list_add(answers, answer1, answer2, answer3);
 
+// Shuffle the answers for REPLAYABILITY!
+ds_list_shuffle(answers);
+
 var newPhrase = ds_list_create();
 ds_list_add(newPhrase, argument1, answers);
 

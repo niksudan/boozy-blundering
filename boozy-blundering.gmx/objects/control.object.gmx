@@ -486,7 +486,7 @@ if (has_characters()) {
                 var answer = get_char_answer(selectedChar, currentPhrase, i);
                 var answerX = answer_x_position(i);
                 var answerY = 100;
-                draw_text(answerX, answerY, answer[0] + '#' + string(answer[1]));
+                draw_text(answerX, answerY, answer[0]);
             }
         }
     
