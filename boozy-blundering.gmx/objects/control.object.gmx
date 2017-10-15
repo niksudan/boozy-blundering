@@ -110,6 +110,9 @@ selectedChar = -1;
 // Whether or not the character is talking
 isTalking = false;
 
+// Whether or not the character is laughing
+isLaughing = false;
+
 // A timer for the talk animation
 talkTimer = 0;
 
@@ -142,15 +145,28 @@ talkTime = 20;
 
 n += 1;
 
-// Character blinking
 if (has_characters()) {
     for (var i = 0; i &lt; 4; i += 1) {
+
+        // Character blinking
         var charIndex = ds_list_find_value(charIndexes, i);
         charIndex += 1;
         if (charIndex &gt; blinkRate) {
             charIndex = random_range(0, blinkRate / 2);
         }
         ds_list_replace(charIndexes, i, charIndex);
+
+        // Character bobbing
+        var bobRate = ds_list_find_value(charBobRates, i);
+        var bobOffset = ds_list_find_value(charBobOffsets, i);
+        var bobRateTarget = bob(0.05, 2, bobOffset);
+        if (isTalking &amp;&amp; selectedChar == i) {
+            bobRateTarget = bob(0.2, 2, bobOffset);
+        } else if (isLaughing) {
+            bobRateTarget = bob(0.3, 10, bobOffset);
+        }
+        bobRate += (bobRateTarget - bobRate) / 10;
+        ds_list_replace(charBobRates, i, bobRate);
     }
 }
 
@@ -160,17 +176,6 @@ if (gameState == 4) {
         talkTimer += 1;
     } else {
         talkTimer = 0;
-    }
-    
-    for (var i = 0; i &lt; 4; i += 1) {
-        var bobRate = ds_list_find_value(charBobRates, i);
-        var bobOffset = ds_list_find_value(charBobOffsets, i);
-        var bobRateTarget = bob(0.05, 2, bobOffset);
-        if (isTalking &amp;&amp; selectedChar == i) {
-            bobRateTarget = bob(0.2, 2, bobOffset);
-        }
-        bobRate += (bobRateTarget - bobRate) / 20;
-        ds_list_replace(charBobRates, i, bobRate);
     }
 }
 
@@ -295,7 +300,7 @@ switch (gameState) {
 
     // [Scene] Conversation
     case 4:
-        isTalking = !isTalking;
+        isLaughing = !isLaughing;
         break;
 }
 
@@ -352,8 +357,14 @@ if (has_characters()) {
                 (charPosition / room_height) * ((room_width / 2) - character_x_position(i))
             );
             charY = 0;
-            if (isTalking &amp;&amp; talkTimer &lt; talkTime / 2) {
-                charIndex = 2;
+            if (isTalking) {
+                if (talkTimer &lt; talkTime / 2) {
+                    charIndex = 2;
+                } else {
+                    charIndex = 0;
+                }
+            } else if (isLaughing) {
+                charIndex = 3;
             }
         }
 
