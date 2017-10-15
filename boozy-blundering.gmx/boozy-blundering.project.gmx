@@ -24,6 +24,7 @@
   <scripts name="scripts">
     <script>scripts\bob.gml</script>
     <script>scripts\character_x_position.gml</script>
+    <script>scripts\answer_x_position.gml</script>
     <script>scripts\create_phrase.gml</script>
     <script>scripts\define_phrases.gml</script>
     <script>scripts\has_characters.gml</script>
