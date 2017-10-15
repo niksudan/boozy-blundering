@@ -36,8 +36,7 @@
 // 4 - [Scene] Conversation
 // 5 - [Animation] Conversation to character select
 // 6 - [Scene] Douche detection
-// 7 - [Scene] Gameover
-// 8 - [Scene] Victory
+// 7 - [Scene] Ending
 gameState = 0;
 
 // Sin wave incremental
@@ -167,6 +166,16 @@ didDetectFake = false;
 // Whether they've detected you're sober (under min douchebag points)
 didDetectSober = false;
 
+// Completion status of each character
+// When these all are true, you win
+completions[0] = false;
+completions[1] = false;
+completions[2] = false;
+completions[3] = false;
+
+// Whether a gameover occurred
+gameover = false;
+
 </string>
           </argument>
         </arguments>
@@ -250,10 +259,13 @@ if (gameState == 4 || gameState == 6) {
 
 }
 
-// Laughter
+// Ending
 if (gameState == 7) {
-    isLaughing = true;
     isTalking = false;
+    
+    if (gameover) {
+        isLaughing = true;
+    }
 }
 
 </string>
@@ -311,7 +323,7 @@ if (gameState == 5) {
     }
 }
 
-// [Animation] Game over
+// [Scene] Ending
 if (gameState == 7) {
     if (charPosition &gt; 0) {
         charPosition -= transitionSpeed;
@@ -349,7 +361,7 @@ if (gameState == 2) {
     var padding = 20;
     for (var i = 0; i &lt; 4 i += 1) {
         var xPos = character_x_position(i);
-        if (mouse_bounds(xPos - padding, xPos + padding, 32, 96)) {
+        if (mouse_bounds(xPos - padding, xPos + padding, 32, 96) &amp;&amp; !completions[i]) {
             selectedChar = i;
             douchebagPoints = 0;
             phraseLength = 0;
@@ -372,11 +384,23 @@ if (gameState == 4) {
     }
     
     if (!didDetectFake &amp;&amp; !didDetectSober) {
-    
-        // Returning to character select
+
+        // Exit a conversation
         if (currentPhrase &gt;= ds_list_size(charPhrases)) {
             currentPhrase = 0;
+            completions[selectedChar] = true;
             gameState = 5;
+            
+            // Check for victory condition
+            var didWin = true;
+            for (var i = 0; i &lt; 4; i += 1) {
+                if (!completions[i]) {
+                    didWin = false;
+                }
+            }
+            if (didWin) {
+                gameState = 7;
+            }
         }
         
         // Selecting an answer
@@ -395,6 +419,7 @@ if (gameState == 4) {
         gameState = 6;
         phraseLength = 0;
         canChooseAnswer = false;
+        gameover = true;
     }
 
 }
@@ -588,9 +613,13 @@ if (has_menu()) {
     draw_sprite(sprLogo, 0, 0, 4 + menuPosition + bob(0.04, 4, 0));
 }
 
-// Game Over
+// Ending
 if (gameState == 7) {
-    draw_text(room_width / 2, room_height / 2, "GAME OVER#You failed to convince them");
+    if (gameover) {
+        draw_text(room_width / 2, room_height / 2, "GAME OVER#You failed to convince them");
+    } else {
+        draw_text(room_width / 2, room_height / 2, "AW YEAH!#You convinced them all!#Four new friends on Facebook!");
+    }
 }
 </string>
           </argument>
