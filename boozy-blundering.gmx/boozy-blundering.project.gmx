@@ -16,6 +16,7 @@
       <sprite>sprites\sprLad</sprite>
       <sprite>sprites\sprJoker</sprite>
     </sprites>
+    <sprite>sprites\sprBubble</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgMain</background>
