@@ -17,6 +17,8 @@
       <sprite>sprites\sprJoker</sprite>
     </sprites>
     <sprite>sprites\sprBubble</sprite>
+    <sprite>sprites\sprSmallBubble</sprite>
+    <sprite>sprites\sprPrompt</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgMain</background>

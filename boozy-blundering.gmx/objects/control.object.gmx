@@ -176,6 +176,9 @@ completions[3] = false;
 // Whether a gameover occurred
 gameover = false;
 
+// The answer bubble effect
+answerBubbleHeight = 0;
+
 </string>
           </argument>
         </arguments>
@@ -255,6 +258,12 @@ if (gameState == 4 || gameState == 6) {
     } else {
         canChooseAnswer = true;
         isTalking = false;
+    }
+    
+    // Answer bubbles
+    answerBubbleHeight = clamp(answerBubbleHeight, 0, 1);
+    if (canChooseAnswer &amp;&amp; answerBubbleHeight &lt; 1) {
+        answerBubbleHeight += 0.2;
     }
 
 }
@@ -405,11 +414,12 @@ if (gameState == 4) {
         
         // Selecting an answer
         selectedAnswer = -1;
-        var padding = 20;
+        var hpadding = 30;
+        var vpadding = 20;
         for (var i = 0; i &lt; 3 i += 1) {
             var xPos = answer_x_position(i);
-            var yPos = 100;
-            if (mouse_bounds(xPos - padding, xPos + padding, yPos - padding, yPos + padding) &amp;&amp; canChooseAnswer) {
+            var yPos = 110;
+            if (mouse_bounds(xPos - hpadding, xPos + hpadding, yPos - vpadding, yPos + vpadding) &amp;&amp; canChooseAnswer) {
                 selectedAnswer = i;
             }
         }
@@ -471,6 +481,7 @@ switch (gameState) {
             show_debug_message('Got ' + string(answer[1]) + ' points, now on ' + string(douchebagPoints));
             currentPhrase += 1;
             phraseLength = 0;
+            answerBubbleHeight = 0;
         }
         break;
         
@@ -517,7 +528,6 @@ draw_rectangle(0, 0, room_width, room_height, false);
 
 // Font
 draw_set_alpha(1);
-draw_set_color(c_white);
 draw_set_font(fntMain);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
@@ -564,9 +574,10 @@ if (has_characters()) {
     
     // Character select prompt text
     if (gameState == 2) {
+        draw_set_color(c_white);
         draw_text(room_width / 2, 20, "Now convince them you're drunk");
         if (selectedChar != -1) {
-            draw_text(mouse_x, mouse_y - 6, "Talk");
+            draw_sprite_ext(sprPrompt, 0, mouse_x, mouse_y, 1, 1, bob(0.25, 5, 0), c_white, 1);
         }
     }
     
@@ -577,24 +588,24 @@ if (has_characters()) {
 
         // Question
         draw_sprite_ext(sprBubble, 0, room_width / 2, 24, 1, min(1, phraseLength / 5), bob(0.1, 1, 0), c_white, 1);
-        draw_set_color(c_black);
         var question = get_char_question(selectedChar, currentPhrase);
+        draw_set_color(c_black);
         draw_text_transformed(room_width / 2, 20, string_copy(question, 0, ceil(phraseLength)), 1, 1, bob(0.1, 1, 0));
-        draw_set_color(c_white);
 
         // Answers
         if (canChooseAnswer) {
             for (var i = 0; i &lt; 3; i += 1) {
                 var answer = get_char_answer(selectedChar, currentPhrase, i);
                 var answerX = answer_x_position(i);
-                var answerY = 100;
-                draw_text(answerX, answerY, answer[0] + '#' + string(answer[1]));
+                var answerY = 110;
+                draw_sprite_ext(sprSmallBubble, 0, answerX, answerY + 6, 1, answerBubbleHeight, bob(0.1, 1, answerX), c_white, 1);
+                draw_text_transformed(answerX, answerY, answer[0] + '#' + string(answer[1]), 1, 1, bob(0.1, 1, answerX));
             }
         }
-    
+        
         // Prompt
         if (selectedAnswer != -1) {
-            draw_text(mouse_x, mouse_y - 6, "Say this");
+            draw_sprite_ext(sprPrompt, 0, mouse_x, mouse_y, 1, 1, bob(0.25, 5, 0), c_white, 1);
         }
     }
     
@@ -608,7 +619,6 @@ if (has_characters()) {
         draw_sprite_ext(sprBubble, 0, room_width / 2, 24, 1, min(1, phraseLength / 5), bob(0.1, 1, 0), c_white, 1);
         draw_set_color(c_black);
         draw_text_transformed(room_width / 2, 20, string_copy(message, 0, ceil(phraseLength)), 1, 1, bob(0.1, 2, 0));
-        draw_set_color(c_white);
     }
 
 }
@@ -621,6 +631,7 @@ if (has_menu()) {
 
 // Ending
 if (gameState == 7) {
+    draw_set_color(c_white);
     if (gameover) {
         draw_text(room_width / 2, room_height / 2, "GAME OVER#You failed to convince them");
     } else {
