@@ -519,7 +519,7 @@ switch (gameState) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw UI elements
+            <string>/// Draw game
 
 // Darkener
 draw_set_alpha((charPosition / room_height) * 0.5);
@@ -575,7 +575,15 @@ if (has_characters()) {
     // Character select prompt text
     if (gameState == 2) {
         draw_set_color(c_white);
-        draw_text(room_width / 2, 20, "Now convince them you're drunk");
+        var isNewGame = true;
+        for (var i = 0; i &lt; 4 i += 1) {
+            if (completions[i]) {
+                isNewGame = false;
+            }
+        }
+        if (isNewGame) {
+            draw_text(room_width / 2, 20, "Convince them you're off your rocker");
+        }
         if (selectedChar != -1) {
             draw_sprite_ext(sprPrompt, 0, mouse_x, mouse_y, 1, 1, bob(0.25, 5, 0), c_white, 1);
         }
@@ -631,11 +639,17 @@ if (has_menu()) {
 
 // Ending
 if (gameState == 7) {
+    draw_set_alpha(((room_height - charPosition) / room_height) * 0.5);
+    draw_set_color(c_black);
+    draw_rectangle(0, 0, room_width, room_height, false);
     draw_set_color(c_white);
+    draw_set_alpha(((room_height - charPosition) / room_height));
     if (gameover) {
-        draw_text(room_width / 2, room_height / 2, "GAME OVER#You failed to convince them");
+        draw_sprite_ext(sprGameover, 0, room_width / 2, room_height * 0.4, 1, 1, bob(0.2, 5, 0), c_white, 1);
+        draw_text(room_width / 2, room_height * 0.8, "What a loser! You couldn't fool them!");
     } else {
-        draw_text(room_width / 2, room_height / 2, "AW YEAH!#You convinced them all!#Four new friends on Facebook!");
+        draw_sprite_ext(sprVictory, 0, room_width / 2, room_height * 0.4, 1, 1, bob(0.2, 5, 0), c_white, 1);
+        draw_text(room_width / 2, room_height * 0.8, "Four new friends on Facebook!");
     }
 }
 </string>
